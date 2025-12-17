@@ -1,0 +1,52 @@
+﻿@section Styles {
+    <link rel="stylesheet" href="~/css/asset/css_part/Home/Home.css" asp-append-version="true" />
+}
+@model List<ClothingStore.Models.Product>
+
+<main class="home-page">
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to ClothingStore</h1>
+            <p>Your one-stop shop for the latest fashion trends.</p>
+            <a asp-controller="Product" asp-action="Index" class="btn-shop-now">Shop Now</a>
+        </div>
+    </section>
+    <section class="featured-products">
+        <h2>All Products</h2>
+        <div class="product-grid">
+           @foreach(var item in Model)
+            {
+                <div class="product-card">
+                    <div class="product-media">
+                        <img src="@(string.IsNullOrEmpty(item.ImageUrl)
+                                 ? Url.Content("~/img/no-image.png")
+                                 : item.ImageUrl.StartsWith("http")
+                                     ? item.ImageUrl
+                                     : Url.Content("~/img/" + item.ImageUrl))"
+                         alt="@item.ProductName"
+                        
+                         onerror="this.src='/img/no-image.png'" />
+
+                    </div>
+
+                    <div class="product-info">
+                        <h3>@item.ProductName</h3>
+                        <p class="price">
+                            <span class="price-current">@item.Price đ</span>
+                            @*<span class="price-original">@item.Price đ</span>*@ 
+                        </p>
+                    </div>
+
+                    <div class="product-actions">
+                        <button type="button" class="btn-cart" aria-label="Add Sample Product to cart" title="Add to cart">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </button>
+
+                        <a asp-controller="Product" asp-action="BuyNow" asp-route-id="1" class="btn-buy-now">Buy Now</a>
+                    </div>
+                </div>
+            }
+            
+        </div>
+    </section>
+</main>
