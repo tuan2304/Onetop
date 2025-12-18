@@ -1,22 +1,82 @@
-html {
-  font-size: 14px;
+:root {
+    /* Responsive spacing scale */
+    --space-xs: clamp(4px, 0.5vw, 8px);
+    --space-sm: clamp(8px, 1vw, 16px);
+    --space-md: clamp(16px, 2vw, 32px);
+    --space-lg: clamp(32px, 4vw, 64px);
+    --space-xl: clamp(64px, 6vw, 128px);
+    /* Grid system */
+    --container-max: 1440px;
+    --grid-gap: clamp(12px, 2vw, 24px);
+    --grid-margin: clamp(40px, 4vw, 80px);
+    /*Design tokens*/
+    /* PRIMARY */
+    --color-primary: #595959;
+    --color-primary-hover: #4d4d4d;
+    --color-on-primary: #ffffff;
+    --color-on-primary-hover: #e6e6e6;
+    /* SECONDARY */
+    --color-secondary: #7f7f7f;
+    --color-secondary-hover: #6f6f6f;
+    --color-on-secondary: #ffffff;
+    --color-on-secondary-hover: #eaeaea;
+    /* ACCENT */
+    --color-accent: #a5a5a5;
+    --color-accent-hover: #959595;
+    --color-on-accent: #1a1a1a;
+    --color-on-accent-hover: #000000;
+    /* SURFACE */
+    --color-surface: #cccccc;
+    --color-surface-hover: #bfbfbf;
+    --color-on-surface: #1a1a1a;
+    --color-on-surface-hover: #000000;
+    /* FEEDBACK STATES */
+    --color-error: #d32f2f;
+    --color-success: #388e3c;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
 
-html {
-  position: relative;
-  min-height: 100%;
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
 }
 
 body {
-  margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+}
+
+    .fa:hover {
+        opacity: 0.7;
+    }
+
+.fa-facebook {
+    color: white;
+}
+
+.fa-instagram {
+    color: white;
+}
+
+/* ========== APP COMPONENT ========== */
+.app-container {
+    flex: 1;
+    width: 100%;
+    background-color: wheat;
 }

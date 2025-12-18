@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ClothingStore.Areas.Admin.Controllers
+namespace OneTop.Areas.Admin.Controllers
 {
     public class DashBoardController : Controller
     {

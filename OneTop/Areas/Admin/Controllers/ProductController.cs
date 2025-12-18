@@ -2,7 +2,7 @@
 using OneTop.Models;
 using OneTop.ViewModels;
 
-namespace ClothingStore.Areas.Admin.Controllers
+namespace OneTop.Areas.Admin.Controllers
 {
     public class ProductController : Controller
     {

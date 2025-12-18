@@ -1,7 +1,7 @@
 ﻿using OneTop.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ClothingStore.Controllers
+namespace OneTop.Controllers
 {
     public class ProductsController : Controller
     {

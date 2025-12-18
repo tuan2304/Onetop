@@ -2,20 +2,23 @@ using System.Diagnostics;
 using OneTop.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ClothingStore.Controllers
+namespace OneTop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ILogger<HomeController> _logger;
+        private ClothingStoreContext context;
+        public HomeController(ILogger<HomeController> logger, ClothingStoreContext context)
         {
             _logger = logger;
+            this.context = context;
         }
 
-        public IActionResult Home()
+        public IActionResult Index()
         {
-            return View();
+            List<Product> products = context.Products.ToList();
+            return View("Home", products);
         }
 
         public IActionResult Privacy()

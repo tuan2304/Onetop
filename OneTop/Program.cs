@@ -27,9 +27,14 @@ app.MapAreaControllerRoute(
  pattern: "Admin/{controller=DashBoard}/{action=DashBoard}/{id?}"
  );
 
+app.MapAreaControllerRoute(
+ name: "myareas",
+ areaName: "Account",
+ pattern: "Account/{controller=Home}/{action=Home}/{id?}"
+ );
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Home}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
