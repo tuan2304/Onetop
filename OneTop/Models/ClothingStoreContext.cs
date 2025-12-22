@@ -15,8 +15,6 @@ public partial class ClothingStoreContext : DbContext
     {
     }
 
-    public virtual DbSet<CartItem> CartItems { get; set; }
-
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<OrderDetail> OrderDetails { get; set; }
@@ -25,32 +23,14 @@ public partial class ClothingStoreContext : DbContext
 
     public virtual DbSet<Report> Reports { get; set; }
 
-    public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
-
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=LAPTOP-BUL3QPCT\\SQLEXPRESS;User Id=sa;Password=1;Database=ClothingStore;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("server=ADMIN;user Id=sa;password=1;database=ClothingStore;TrustServerCertificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<CartItem>(entity =>
-        {
-            entity.Property(e => e.CartItemId).HasColumnName("CartItemID");
-            entity.Property(e => e.CartId).HasColumnName("CartID");
-            entity.Property(e => e.ProductId).HasColumnName("ProductID");
-            entity.Property(e => e.Quantity).HasDefaultValue(1);
-
-            entity.HasOne(d => d.Cart).WithMany(p => p.CartItems)
-                .HasForeignKey(d => d.CartId)
-                .HasConstraintName("FK_CartItems_ShoppingCart");
-
-            entity.HasOne(d => d.Product).WithMany(p => p.CartItems)
-                .HasForeignKey(d => d.ProductId)
-                .HasConstraintName("FK_CartItems_Products");
-        });
-
         modelBuilder.Entity<Order>(entity =>
         {
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
@@ -106,26 +86,9 @@ public partial class ClothingStoreContext : DbContext
             entity.Property(e => e.TotalRevenue).HasColumnType("decimal(12, 2)");
         });
 
-        modelBuilder.Entity<ShoppingCart>(entity =>
-        {
-            entity.HasKey(e => e.CartId);
-
-            entity.ToTable("ShoppingCart");
-
-            entity.Property(e => e.CartId).HasColumnName("CartID");
-            entity.Property(e => e.CreatedDate)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-
-            entity.HasOne(d => d.User).WithMany(p => p.ShoppingCarts)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK_ShoppingCart_Users");
-        });
-
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E4C92869E0").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Users__536C85E43F5E30B5").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.Email).HasMaxLength(100);

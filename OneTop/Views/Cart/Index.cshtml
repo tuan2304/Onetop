@@ -1,0 +1,84 @@
+﻿@model OneTop.Models.CartModel
+@{
+    ViewData["Title"] = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/asset/css_part/Home/Cart.css" asp-append-version="true" />
+}
+
+<div class="cart-container">
+    <!-- LEFT -->
+    <div class="cart-left">
+        <h2 class="cart-heading">Giỏ Hàng</h2>
+        <p class="cart-count">Mặt hàng (@Model.items.Count)</p>
+
+        @foreach (var item in Model.items)
+        {
+            <div class="cart-item">
+                <img src="@Url.Content("~/img/" + item.ImageUrl)" class="cart-item-img" />
+
+                <div class="cart-item-info">
+                    <h3>@item.ProductName</h3>
+                    <p class="cart-color">Màu sắc: Xám</p>
+
+                    <p class="cart-price">
+                        @item.Price.ToString("N0") VND
+                    </p>
+
+                    <div class="cart-qty">
+                        <button>-</button>
+                        <span>@item.Quantity</span>
+                        <button>+</button>
+                    </div>
+                </div>
+
+                <div class="cart-item-subtotal">
+                    <p>Tạm tính</p>
+                    <strong>
+                        @((item.Price * item.Quantity).ToString("N0")) VND
+                    </strong>
+
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- RIGHT -->
+    <div class="cart-right">
+        <h3>Thông tin đơn hàng (@Model.items.Count)</h3>
+
+        <div class="summary-row">
+            <span>Tạm tính</span>
+            <span>@Model.GetTotal().ToString("N0") VND</span>
+        </div>
+
+        <div class="summary-row">
+            <span>Phí vận chuyển</span>
+            <span class="free">Miễn phí</span>
+        </div>
+
+        <div class="summary-row">
+            <span>Khuyến mãi</span>
+            <span>0 VND</span>
+        </div>
+
+        <div class="voucher">
+            <input type="text" placeholder="Mã giảm giá" />
+            <button>ÁP DỤNG</button>
+        </div>
+
+        <hr />
+
+        <div class="summary-total">
+            <span>Tổng tiền</span>
+            <strong>@Model.GetTotal().ToString("N0") VND</strong>
+        </div>
+
+        <button class="checkout-btn">Thanh toán</button>
+        <a asp-controller="Home" asp-action="Index" class="continue-btn">
+            Tiếp tục mua hàng
+        </a>
+    </div>
+</div>

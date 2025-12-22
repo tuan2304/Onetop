@@ -70,9 +70,6 @@ namespace OneTop.Areas.Admin.Controllers
             {
                 return View(model);
             }
-
-
-
         }
 
 
