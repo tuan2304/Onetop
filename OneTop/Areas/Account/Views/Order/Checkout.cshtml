@@ -1,0 +1,44 @@
+﻿@model List<OneTop.Models.CartItemModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/asset/css_part/Home/Checkout.css" asp-append-version="true" />
+}
+<div class="checkout-container">
+    <h2 class="checkout-title">XÁC NHẬN ĐƠN HÀNG</h2>
+
+    <table class="checkout-table">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Price.ToString("N0") đ</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Price* item.Quantity).ToString("N0") đ</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="checkout-total">
+        Tổng tiền:
+        <span>@Model.Sum(x => x.Price * x.Quantity).ToString("N0") đ</span>
+    </div>
+
+    <form asp-controller="Order" asp-action="PlaceOrder" method="post">
+        <button type="submit" class="btn-confirm">
+            Xác nhận đặt hàng
+        </button>
+    </form>
+</div>

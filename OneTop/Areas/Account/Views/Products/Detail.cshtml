@@ -44,19 +44,22 @@
             <p class="pd-stock">
                Trạng Thái: @(Model.Stock > 0 ? "Còn hàng" : "Hết hàng")
             </p>
+                <div class="pd-actions">
+                    <a class="btn btn-add-cart"
+                       asp-controller="Cart"
+                       asp-action="AddToCart"
+                       asp-route-id="@Model.ProductId">
+                        Thêm vào giỏ
+                    </a>
 
-            <div class="pd-actions">
-                <button type="button" class="btn btn-add-cart">
-                    Thêm vào giỏ
-                </button>
+                    <a asp-controller="Product"
+                       asp-action="BuyNow"
+                       asp-route-id="@Model.ProductId"
+                       class="btn btn-buy-now">
+                        Mua ngay
+                    </a>
+                </div>
 
-                <a asp-controller="Product"
-                   asp-action="BuyNow"
-                   asp-route-id="@Model.ProductId"
-                   class="btn btn-buy-now">
-                    Mua ngay
-                </a>
-            </div>
 
         </div>
 

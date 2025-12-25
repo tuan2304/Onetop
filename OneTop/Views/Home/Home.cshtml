@@ -3,6 +3,8 @@
 }
 @model List<OneTop.Models.Product>
 
+
+
 <main class="home-page">
     <section class="hero-section">
         <div class="hero-content">
@@ -18,16 +20,17 @@
             {
                 <div class="product-card">
                     <div class="product-media">
-                        <img src="@(string.IsNullOrEmpty(item.ImageUrl)
-                                 ? Url.Content("~/img/no-image.png")
-                                 : item.ImageUrl.StartsWith("http")
-                                     ? item.ImageUrl
-                                     : Url.Content("~/img/" + item.ImageUrl))"
-                         alt="@item.ProductName"
-                        
-                         onerror="this.src='/img/no-image.png'" />
-
-                    </div>
+                        <a asp-controller="Products"
+                           asp-action="Detail"
+                           asp-route-id="@item.ProductId">
+                            <img src="@(item.ImageUrl.StartsWith("http")
+                                                                  ? item.ImageUrl
+                                                                  : Url.Content("~/img/" + item.ImageUrl))"
+                             alt="@item.ProductName"
+                             onerror="this.src='/img/no-image.png'" />
+                    </a>
+                    @* <span class="discount-badge">-25%</span> *@
+                </div>
 
                     <div class="product-info">
                         <h3 class="product-name">

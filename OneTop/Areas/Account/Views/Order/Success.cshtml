@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/asset/css_part/Home/Success.css" asp-append-version="true" />
+}
+
+<div class="success-container">
+    <div class="success-icon">🎉</div>
+
+    <h2>Đặt hàng thành công</h2>
+    <p>Cảm ơn bạn đã mua hàng tại OnTop</p>
+
+    <a asp-controller="Home" asp-action="Index" class="btn-home">
+        ← Quay về trang chủ
+    </a>
+</div>

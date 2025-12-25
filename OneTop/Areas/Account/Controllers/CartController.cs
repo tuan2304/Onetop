@@ -35,7 +35,8 @@ namespace OneTop.Areas.Account.Controllers
             var product = ctx.Products.SingleOrDefault(p => p.ProductId == id);
             if (product == null)
             {
-                return NotFound();
+                TempData["Message"] = "Sản phẩm không tồn tại";
+                return RedirectToAction("Index", "Home");
             }
 
             CartItemModel item = new CartItemModel
@@ -48,12 +49,7 @@ namespace OneTop.Areas.Account.Controllers
             };
 
             List<CartItemModel> list =
-                HttpContext.Session.GetObject<List<CartItemModel>>("cart");
-
-            if (list == null)
-            {
-                list = new List<CartItemModel>();
-            }
+                HttpContext.Session.GetObject<List<CartItemModel>>("cart") ?? new();
 
             CartModel cart = new CartModel();
             cart.items = list;
@@ -61,7 +57,56 @@ namespace OneTop.Areas.Account.Controllers
 
             HttpContext.Session.SetObject("cart", cart.getAllItems());
 
+            TempData["Message"] = "Đã thêm vào giỏ hàng thành công";
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+
+        public IActionResult Increase(int id)
+        {
+            List<CartItemModel> list =
+                HttpContext.Session.GetObject<List<CartItemModel>>("cart");
+
+            if (list != null)
+            {
+                var item = list.FirstOrDefault(x => x.ProductId == id);
+                if (item != null)
+                {
+                    item.Quantity++;
+                }
+
+                HttpContext.Session.SetObject("cart", list);
+            }
+
             return RedirectToAction("Index");
         }
+
+        public IActionResult Decrease(int id)
+        {
+            List<CartItemModel> list =
+                HttpContext.Session.GetObject<List<CartItemModel>>("cart");
+
+            if (list != null)
+            {
+                var item = list.FirstOrDefault(x => x.ProductId == id);
+                if (item != null)
+                {
+                    item.Quantity--;
+
+                    if (item.Quantity <= 0)
+                    {
+                        list.Remove(item);
+                    }
+                }
+
+                HttpContext.Session.SetObject("cart", list);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
