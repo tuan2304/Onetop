@@ -26,18 +26,27 @@
                 Danh mục: <strong>@Model.CategoryName</strong>
             </p>
 
-            <span class="price-current">
-                @(((Model.Price * (100 - (Model.DiscountPercent ?? 0))) / 100m).ToString("N0")) đ
-            </span>
-
-
-            <span class="price-original">@Model.Price.ToString("N0") đ</span>
-            @if (Model.DiscountPercent.HasValue)
+            @if (Model.DiscountPercent.HasValue && Model.DiscountPercent > 0)
             {
+                <span class="price-current">
+                    @(((Model.Price * (100 - Model.DiscountPercent.Value)) / 100m).ToString("N0")) đ
+                </span>
+
+                <span class="price-original">
+                    @Model.Price.ToString("N0") đ
+                </span>
+
                 <p class="pd-discount">
-                    Giảm Giá: @Model.DiscountPercent %
+                    Giảm giá: @Model.DiscountPercent %
                 </p>
             }
+            else
+            {
+                <span class="price-current">
+                    @Model.Price.ToString("N0") đ
+                </span>
+            }
+
 
             <p class="pd-stock">
                Trạng Thái: @(Model.Stock > 0 ? "Còn hàng" : "Hết hàng")
@@ -46,7 +55,7 @@
             <div class="pd-actions">
 
 
-                <a asp-controller="Login" asp-action="Login"  class="btn-buy-now">Buy Now</a>
+                <a asp-controller="Login" asp-action="Login" class="btn-buy-now">Mua Ngay</a>
 
             </div>
 

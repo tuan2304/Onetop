@@ -36,13 +36,24 @@
                             </a>
                         </h3>
                         <p class="price">
-                            <span class="price-current">
-                                @(((item.Price * (100 - (item.DiscountPercent ?? 0))) / 100m).ToString("N0")) đ
-                            </span>
+                        @if (item.DiscountPercent.HasValue && item.DiscountPercent > 0)
+                            {
+                                <span class="price-current">
+                                    @(((item.Price * (100 - item.DiscountPercent.Value)) / 100m).ToString("N0")) đ
+                                </span>
 
-
-                            <span class="price-original">@item.Price.ToString("N0") đ</span>
+                                <span class="price-original">
+                                    @item.Price.ToString("N0") đ
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="price-current">
+                                    @item.Price.ToString("N0") đ
+                                </span>
+                            }
                         </p>
+
                     </div>
 
                     <div class="product-actions">
@@ -58,7 +69,7 @@
                            asp-action="BuyNow"
                            asp-route-id="@item.ProductId"
                            class="btn-buy-now">
-                            Buy Now
+                            Mua Ngay
                         </a>
                     </div>
                 </div>

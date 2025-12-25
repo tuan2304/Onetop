@@ -97,3 +97,66 @@
   .order-table tbody td:first-child { font-weight: 700; }
   .admin-order-manager .search { width: 100%; margin-bottom: 8px; }
 }
+
+/* ================= ACTION BUTTONS ================= */
+.action-buttons {
+    display: flex;
+    flex-direction: column; /* x?p nút trên – dý?i */
+    align-items: center;
+    gap: 6px;
+}
+
+/* ================= BUTTON BASE ================= */
+.btn {
+    width: 100px; /* c? ð?nh ð? không l?ch c?t */
+    padding: 6px 0;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+/* ================= BUTTON STATES ================= */
+.btn-confirm {
+    background-color: #1976d2;
+}
+
+    .btn-confirm:hover {
+        background-color: #125aa0;
+    }
+
+.btn-complete {
+    background-color: #2e7d32;
+}
+
+    .btn-complete:hover {
+        background-color: #1b5e20;
+    }
+
+.btn-cancel {
+    background-color: #d32f2f;
+}
+
+    .btn-cancel:hover {
+        background-color: #9a0007;
+    }
+
+/* ================= STATUS TEXT ================= */
+.status-text.canceled {
+    color: #d32f2f;
+    font-weight: 600;
+}
+
+/* ================= ACTION COLUMN FIX ================= */
+.order-table th:last-child,
+.order-table td:last-child {
+    width: 140px;
+    text-align: center;
+    vertical-align: middle;
+}
+

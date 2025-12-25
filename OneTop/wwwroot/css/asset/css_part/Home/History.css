@@ -66,3 +66,27 @@
         background: #e8f5e9;
         color: #2e7d32;
     }
+    .status.Đãhủy {
+        background: #fdecea;
+        color: #d32f2f;
+        font-weight: 600;
+    }
+
+
+.btn-detail {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #1976d2;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+    .btn-detail:hover {
+        background-color: #125aa0;
+        transform: translateY(-1px);
+    }
+

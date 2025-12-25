@@ -39,14 +39,22 @@ namespace OneTop.Areas.Account.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            decimal finalPrice = product.Price;
+
+            if (product.DiscountPercent.HasValue && product.DiscountPercent > 0)
+            {
+                finalPrice = product.Price * (100 - product.DiscountPercent.Value) / 100m;
+            }
+
             CartItemModel item = new CartItemModel
             {
                 ProductId = product.ProductId,
                 ProductName = product.ProductName,
-                Price = product.Price,
+                Price = finalPrice,
                 ImageUrl = product.ImageUrl,
                 Quantity = 1
             };
+
 
             List<CartItemModel> list =
                 HttpContext.Session.GetObject<List<CartItemModel>>("cart") ?? new();
@@ -116,14 +124,22 @@ namespace OneTop.Areas.Account.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            decimal finalPrice = product.Price;
+
+            if (product.DiscountPercent.HasValue && product.DiscountPercent > 0)
+            {
+                finalPrice = product.Price * (100 - product.DiscountPercent.Value) / 100m;
+            }
+
             CartItemModel item = new CartItemModel
             {
                 ProductId = product.ProductId,
                 ProductName = product.ProductName,
-                Price = product.Price,
+                Price = finalPrice,
                 ImageUrl = product.ImageUrl,
                 Quantity = 1
             };
+
 
             List<CartItemModel> list =
                 HttpContext.Session.GetObject<List<CartItemModel>>("cart") ?? new();

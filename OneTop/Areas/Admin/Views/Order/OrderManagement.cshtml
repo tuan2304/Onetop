@@ -41,8 +41,52 @@
                 <td>@order.PaymentMethod</td>
                 <td>@order.Status</td>
                 <td>
-                    <a class="btn btn-sm" asp-area="admin" asp-controller="Order" asp-action="Details" asp-route-id="@order.OrderId">Xac nhan</a>
-                </td>
+                    <div class="action-buttons">
+                        @if (order.Status == "Chờ xử lý")
+                            {
+                                <a class="btn btn-confirm"
+                                   asp-area="Admin"
+                                   asp-controller="Order"
+                                   asp-action="Confirm"
+                                   asp-route-id="@order.OrderId">
+                                    Xác nhận
+                                </a>
+
+                                <a class="btn btn-cancel"
+                                   asp-area="Admin"
+                                   asp-controller="Order"
+                                   asp-action="Cancel"
+                                   asp-route-id="@order.OrderId">
+                                    Hủy
+                                </a>
+                            }
+                            else if (order.Status == "Đang giao")
+                            {
+                                <a class="btn btn-complete"
+                                   asp-area="Admin"
+                                   asp-controller="Order"
+                                   asp-action="Complete"
+                                   asp-route-id="@order.OrderId">
+                                    Hoàn thành
+                                </a>
+
+                                <a class="btn btn-cancel"
+                                   asp-area="Admin"
+                                   asp-controller="Order"
+                                   asp-action="Cancel"
+                                   asp-route-id="@order.OrderId">
+                                    Hủy
+                                </a>
+                            }
+                            else if (order.Status == "Hủy")
+                            {
+                                <span class="status-text canceled">Đã hủy</span>
+                            }
+                        </div>
+                    </td>
+
+                   
+
             </tr>
         }
         </tbody>

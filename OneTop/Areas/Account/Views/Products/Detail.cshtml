@@ -11,7 +11,7 @@
 
     <div class="pd-layout">
 
-        <!-- LEFT: IMAGE -->
+        
         <div class="pd-left">
             <img src="@(Model.ImageUrl?.StartsWith("http") == true
                                          ? Model.ImageUrl
@@ -20,7 +20,7 @@
                  onerror="this.src='/img/no-image.png'" />
         </div>
 
-        <!-- RIGHT: INFO -->
+        
         <div class="pd-right">
             <h1 class="pd-name">@Model.ProductName</h1>
 
@@ -28,18 +28,27 @@
                 Danh mục: <strong>@Model.CategoryName</strong>
             </p>
 
-            <span class="price-current">
-                @(((Model.Price * (100 - (Model.DiscountPercent ?? 0))) / 100m).ToString("N0")) đ
-            </span>
-
-
-            <span class="price-original">@Model.Price.ToString("N0") đ</span>
-            @if (Model.DiscountPercent.HasValue)
+            @if (Model.DiscountPercent.HasValue && Model.DiscountPercent > 0)
             {
+                <span class="price-current">
+                    @(((Model.Price * (100 - Model.DiscountPercent.Value)) / 100m).ToString("N0")) đ
+                </span>
+
+                <span class="price-original">
+                    @Model.Price.ToString("N0") đ
+                </span>
+
                 <p class="pd-discount">
-                    Giảm Giá: @Model.DiscountPercent %
+                    Giảm giá: @Model.DiscountPercent %
                 </p>
             }
+            else
+            {
+                <span class="price-current">
+                    @Model.Price.ToString("N0") đ
+                </span>
+            }
+
 
             <p class="pd-stock">
                Trạng Thái: @(Model.Stock > 0 ? "Còn hàng" : "Hết hàng")
@@ -56,7 +65,7 @@
                    asp-action="BuyNow"
                    asp-route-id="@Model.ProductId"
                    class="btn-buy-now">
-                    Buy Now
+                    Mua Ngay
                 </a>
                 </div>
 
@@ -65,7 +74,7 @@
 
     </div>
 
-    <!-- DESCRIPTION -->
+    
     <section class="pd-description">
         <h2>Mô tả sản phẩm</h2>
         <p>@Model.Description</p>
