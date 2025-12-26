@@ -23,39 +23,21 @@ namespace OneTop.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteUser(int id)
+        public ActionResult DeleteUser(int id)
         {
-            var user = context.Users.FirstOrDefault(x => x.UserId == id);
-            if (user == null)
-            {
-                TempData["Error"] = "User not found.";
-                return RedirectToAction("UserManagement");
-            }
+            var user = context.Users.Find(id);
 
-            using var transaction = context.Database.BeginTransaction();
-            try
-            {
-                
-                context.Database.ExecuteSqlRaw(
-                    "DELETE CI FROM CartItems CI INNER JOIN ShoppingCart SC ON CI.CartID = SC.CartID WHERE SC.UserID = {0}",
-                    id);
-               
-                context.Database.ExecuteSqlRaw("DELETE FROM ShoppingCart WHERE UserID = {0}", id);
+            var orders = context.Orders.Where(o => o.UserId == id).ToList();
+            foreach (var o in orders)
+                o.UserId = null;   // Bỏ liên kết
 
-                context.Users.Remove(user);
-                context.SaveChanges();
-
-                transaction.Commit();
-                TempData["Message"] = "User deleted.";
-            }
-            catch (Exception ex)
-            {
-                transaction.Rollback();
-                TempData["Error"] = "Unable to delete user: " + (ex.InnerException?.Message ?? ex.Message);
-            }
+            context.Users.Remove(user);
+            context.SaveChanges();
 
             return RedirectToAction("UserManagement");
         }
+
+
 
         [HttpGet]
         public IActionResult CreateUser()
