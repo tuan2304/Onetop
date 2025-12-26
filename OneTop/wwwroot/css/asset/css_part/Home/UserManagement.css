@@ -1,0 +1,103 @@
+﻿/* ===== USER MANAGEMENT ===== */
+.user-management {
+    padding: 30px;
+    background: #f5f6fa;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+    .user-management h2 {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 25px;
+        color: #2c3e50;
+    }
+
+/* ===== ALERT ===== */
+.alert {
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.alert-danger {
+    background: #fdecea;
+    color: #c62828;
+}
+
+/* ===== TABLE ===== */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+    .table thead {
+        background: #2c3e50;
+    }
+
+        .table thead th {
+            color: #fff;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: left;
+        }
+
+    .table tbody td {
+        padding: 14px;
+        font-size: 14px;
+        border-bottom: 1px solid #eee;
+        vertical-align: middle;
+    }
+
+    .table tbody tr:hover {
+        background: #f9fafb;
+    }
+
+    /* ===== ROLE BADGE ===== */
+    .table td:nth-child(5) {
+        font-weight: 600;
+    }
+
+        .table td:nth-child(5):contains("Admin") {
+            color: #e53935;
+        }
+
+        .table td:nth-child(5):contains("Customer") {
+            color: #2e7d32;
+        }
+
+/* ===== ACTION BUTTON ===== */
+.btn-danger {
+    background: #e53935;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .btn-danger:hover {
+        background: #c62828;
+    }
+
+/* ===== EMPTY STATE ===== */
+.table tbody tr td[colspan] {
+    text-align: center;
+    padding: 30px;
+    color: #888;
+    font-style: italic;
+}
